@@ -553,6 +553,7 @@ static PyObject* pybullet_saveBullet(PyObject* self, PyObject* args, PyObject* k
 
 static PyObject* pybullet_loadMJCF(PyObject* self, PyObject* args, PyObject* keywds)
 {
+	printf("pybullet_loadMJCF");
 	const char* mjcfFileName = "";
 	b3SharedMemoryStatusHandle statusHandle;
 	int statusType;

@@ -284,6 +284,7 @@ int b3RobotSimulatorClientAPI::loadURDF(const std::string& fileName, const struc
 
 bool b3RobotSimulatorClientAPI::loadMJCF(const std::string& fileName, b3RobotSimulatorLoadFileResults& results)
 {
+	printf("b3RobotSimulatorClientAPI::loadMJCF");
 	if (!isConnected())
 	{
 		b3Warning("Not connected");
