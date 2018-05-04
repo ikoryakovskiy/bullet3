@@ -1185,7 +1185,9 @@ struct BulletMJCFImporterInternalData
 				parseGeom(curDefaults, xml,modelIndex, orgChildLinkIndex , logger,inertialShift);
 				if (!massDefined)
 				{
+					// #ivan
 					localInertialFrame.setOrigin(inertialShift);
+					printf("inertialShift: (%f, %f, %f)\n", inertialShift[0], inertialShift[1], inertialShift[2]);
 				}
 				handled = true;
 			}
@@ -1577,7 +1579,15 @@ void  BulletMJCFImporter::getMassAndInertia(int urdfLinkIndex, btScalar& mass,bt
 		inertialFrame.setIdentity();
 	}
 	printf("    mass: %f\n", mass);
-	printf("    inertia: (%f, %f, %f)\n", localInertiaDiagonal[0], localInertiaDiagonal[1], localInertiaDiagonal[2]);
+	printf("    localInertiaDiagonal: (%f, %f, %f)\n", localInertiaDiagonal[0], localInertiaDiagonal[1], localInertiaDiagonal[2]);
+
+	printf("    btTransform\n");
+	btVector3   origin = inertialFrame.getOrigin();
+	btMatrix3x3 basis  = inertialFrame.getBasis();
+	printf("    	m_origin: (%f, %f, %f)\n", origin[0], origin[1], origin[2]);
+	printf("        m_basis\n");
+	for (int i = 0; i < 3; i++)
+		printf("            (%f, %f, %f)\n", basis[i][0], basis[i][1], basis[i][2]);
 }
     
 ///fill an array of child link indices for this link, btAlignedObjectArray behaves like a std::vector so just use push_back and resize(0) if needed
