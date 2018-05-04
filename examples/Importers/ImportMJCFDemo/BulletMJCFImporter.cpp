@@ -1241,6 +1241,9 @@ struct BulletMJCFImporterInternalData
 			mass = density * volume;
 		}
 		linkPtr->m_inertia.m_linkLocalFrame = localInertialFrame;// = jointTrans.inverse();
+		linkPtr->m_inertia.m_ixx = localInertiaDiag[0]; // #ivan
+		linkPtr->m_inertia.m_iyy = localInertiaDiag[1];
+		linkPtr->m_inertia.m_izz = localInertiaDiag[2];
 		linkPtr->m_inertia.m_mass = mass;
 		return true;
 	}
