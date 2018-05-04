@@ -1578,7 +1578,6 @@ void  BulletMJCFImporter::getMassAndInertia(int urdfLinkIndex, btScalar& mass,bt
 	}
 	printf("    mass: %f\n", mass);
 	printf("    inertia: (%f, %f, %f)\n", localInertiaDiagonal[0], localInertiaDiagonal[1], localInertiaDiagonal[2]);
-	printf("    inertia: (%f, %f, %f)\n", localInertiaDiagonal[0], localInertiaDiagonal[1], localInertiaDiagonal[2]);
 }
     
 ///fill an array of child link indices for this link, btAlignedObjectArray behaves like a std::vector so just use push_back and resize(0) if needed

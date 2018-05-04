@@ -1817,7 +1817,7 @@ bool PhysicsServerCommandProcessor::processImportedObjects(const char* fileName,
 			bodyHandle->m_bodyName = u2b.getBodyName();
             btVector3 localInertiaDiagonal(0,0,0);
             int urdfLinkIndex = u2b.getRootLinkIndex();
-            printf("body name-1: %s\n", bodyHandle->m_bodyName->c_str());
+            printf("body name-1: %s\n", bodyHandle->m_bodyName.c_str());
             u2b.getMassAndInertia(urdfLinkIndex, mass,localInertiaDiagonal,bodyHandle->m_rootLocalInertialFrame);
         }
 
@@ -1863,7 +1863,7 @@ bool PhysicsServerCommandProcessor::processImportedObjects(const char* fileName,
 				btScalar mass;
                 btVector3 localInertiaDiagonal(0,0,0);
                 btTransform localInertialFrame;
-				printf("body name-2: %s\n", bodyHandle->m_bodyName->c_str());
+				printf("body name-2: %s\n", bodyHandle->m_bodyName.c_str());
 				u2b.getMassAndInertia(urdfLinkIndex, mass,localInertiaDiagonal,localInertialFrame);
 				bodyHandle->m_linkLocalInertialFrames.push_back(localInertialFrame);
 
@@ -2008,7 +2008,7 @@ bool PhysicsServerCommandProcessor::loadUrdf(const char* fileName, const btVecto
             bodyHandle->m_rootLocalInertialFrame.setIdentity();
             btVector3 localInertiaDiagonal(0,0,0);
             int urdfLinkIndex = u2b.getRootLinkIndex();
-            printf("body name-3: %s\n", bodyHandle->m_bodyName->c_str());
+            printf("body name-3: %s\n", bodyHandle->m_bodyName.c_str());
             u2b.getMassAndInertia(urdfLinkIndex, mass,localInertiaDiagonal,bodyHandle->m_rootLocalInertialFrame);
         }
 		if (m_data->m_verboseOutput)
@@ -2094,7 +2094,7 @@ bool PhysicsServerCommandProcessor::loadUrdf(const char* fileName, const btVecto
 				   btScalar mass;
                    btVector3 localInertiaDiagonal(0,0,0);
                    btTransform localInertialFrame;
-				   printf("body name-4: %s\n", bodyHandle->m_bodyName->c_str());
+				   printf("body name-4: %s\n", bodyHandle->m_bodyName.c_str());
 				   u2b.getMassAndInertia(urdfLinkIndex, mass,localInertiaDiagonal,localInertialFrame);
 				   bodyHandle->m_linkLocalInertialFrames.push_back(localInertialFrame);
 
