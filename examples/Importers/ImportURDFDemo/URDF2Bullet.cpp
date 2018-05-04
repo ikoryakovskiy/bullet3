@@ -212,7 +212,7 @@ void ConvertURDF2BulletInternal(
         //b3Printf("urdf parent index = %d\n",urdfParentIndex);
         //b3Printf("mb parent index = %d\n",mbParentIndex);
         parentRigidBody = cache.getRigidBodyFromLink(urdfParentIndex);
-        printf("ConvertURDF2BulletInternal\n");
+//        printf("ConvertURDF2BulletInternal\n"); // #ivan-debug
 		u2b.getMassAndInertia(urdfParentIndex, parentMass,parentLocalInertiaDiagonal,parentLocalInertialFrame);
 
     }
@@ -221,7 +221,7 @@ void ConvertURDF2BulletInternal(
     btTransform localInertialFrame;
     localInertialFrame.setIdentity();
     btVector3 localInertiaDiagonal(0,0,0);
-    printf("ConvertURDF2BulletInternal-2\n");
+//    printf("ConvertURDF2BulletInternal-2\n"); // #ivan-debug
     u2b.getMassAndInertia(urdfLinkIndex, mass,localInertiaDiagonal,localInertialFrame);
 
 

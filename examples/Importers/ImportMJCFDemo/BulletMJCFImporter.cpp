@@ -1185,9 +1185,8 @@ struct BulletMJCFImporterInternalData
 				parseGeom(curDefaults, xml,modelIndex, orgChildLinkIndex , logger,inertialShift);
 				if (!massDefined)
 				{
-					// #ivan
 					localInertialFrame.setOrigin(inertialShift);
-					printf("inertialShift: (%f, %f, %f)\n", inertialShift[0], inertialShift[1], inertialShift[2]);
+					//printf("inertialShift: (%f, %f, %f)\n", inertialShift[0], inertialShift[1], inertialShift[2]); // #ivan-debug
 				}
 				handled = true;
 			}
@@ -1378,7 +1377,7 @@ BulletMJCFImporter::~BulletMJCFImporter()
 
 bool BulletMJCFImporter::loadMJCF(const char* fileName, MJCFErrorLogger* logger, bool forceFixedBase)
 {
-	printf("BulletMJCFImporter::loadMJCF\n");
+	//printf("BulletMJCFImporter::loadMJCF\n");// #ivan-debug
 	if (strlen(fileName)==0)
         return false;
 
@@ -1563,11 +1562,10 @@ std::string BulletMJCFImporter::getJointName(int linkIndex) const
     //fill mass and inertial data. If inertial data is missing, please initialize mass, inertia to sensitive values, and inertialFrame to identity.
 void  BulletMJCFImporter::getMassAndInertia(int urdfLinkIndex, btScalar& mass,btVector3& localInertiaDiagonal, btTransform& inertialFrame) const
 {
-	printf("BulletMJCFImporter::getMassAndInertia\n");
+	//printf("BulletMJCFImporter::getMassAndInertia\n"); // #ivan-debug
 	const UrdfLink* link = m_data->getLink(m_data->m_activeModel,urdfLinkIndex);
 	if (link)
 	{
-		printf("    link\n");
 		mass = link->m_inertia.m_mass;
 		localInertiaDiagonal.setValue(link->m_inertia.m_ixx,
 			link->m_inertia.m_iyy,
@@ -1576,11 +1574,12 @@ void  BulletMJCFImporter::getMassAndInertia(int urdfLinkIndex, btScalar& mass,bt
 		inertialFrame = link->m_inertia.m_linkLocalFrame;
 	} else
 	{
-		printf("    not link\n");
 		mass = 0;
 		localInertiaDiagonal.setZero();
 		inertialFrame.setIdentity();
 	}
+/*
+// #ivan-debug
 	printf("    mass: %f\n", mass);
 	printf("    localInertiaDiagonal: (%f, %f, %f)\n", localInertiaDiagonal[0], localInertiaDiagonal[1], localInertiaDiagonal[2]);
 
@@ -1591,6 +1590,7 @@ void  BulletMJCFImporter::getMassAndInertia(int urdfLinkIndex, btScalar& mass,bt
 	printf("        m_basis\n");
 	for (int i = 0; i < 3; i++)
 		printf("            (%f, %f, %f)\n", basis[i][0], basis[i][1], basis[i][2]);
+*/
 }
     
 ///fill an array of child link indices for this link, btAlignedObjectArray behaves like a std::vector so just use push_back and resize(0) if needed
