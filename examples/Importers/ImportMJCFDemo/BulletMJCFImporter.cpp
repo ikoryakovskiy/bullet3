@@ -1373,7 +1373,7 @@ BulletMJCFImporter::~BulletMJCFImporter()
 
 bool BulletMJCFImporter::loadMJCF(const char* fileName, MJCFErrorLogger* logger, bool forceFixedBase)
 {
-	printf("BulletMJCFImporter::loadMJCF");
+	printf("BulletMJCFImporter::loadMJCF\n");
 	if (strlen(fileName)==0)
         return false;
 
@@ -1558,10 +1558,11 @@ std::string BulletMJCFImporter::getJointName(int linkIndex) const
     //fill mass and inertial data. If inertial data is missing, please initialize mass, inertia to sensitive values, and inertialFrame to identity.
 void  BulletMJCFImporter::getMassAndInertia(int urdfLinkIndex, btScalar& mass,btVector3& localInertiaDiagonal, btTransform& inertialFrame) const
 {
-	printf("BulletMJCFImporter::getMassAndInertia");
+	printf("BulletMJCFImporter::getMassAndInertia\n");
 	const UrdfLink* link = m_data->getLink(m_data->m_activeModel,urdfLinkIndex);
 	if (link)
 	{
+		printf("    link\n");
 		mass = link->m_inertia.m_mass;
 		localInertiaDiagonal.setValue(link->m_inertia.m_ixx,
 			link->m_inertia.m_iyy,
@@ -1570,11 +1571,13 @@ void  BulletMJCFImporter::getMassAndInertia(int urdfLinkIndex, btScalar& mass,bt
 		inertialFrame = link->m_inertia.m_linkLocalFrame;
 	} else
 	{
+		printf("    not link\n");
 		mass = 0;
 		localInertiaDiagonal.setZero();
 		inertialFrame.setIdentity();
 	}
 	printf("    mass: %f\n", mass);
+	printf("    inertia: (%f, %f, %f)\n", localInertiaDiagonal[0], localInertiaDiagonal[1], localInertiaDiagonal[2]);
 	printf("    inertia: (%f, %f, %f)\n", localInertiaDiagonal[0], localInertiaDiagonal[1], localInertiaDiagonal[2]);
 }
     
